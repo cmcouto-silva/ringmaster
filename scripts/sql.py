@@ -46,6 +46,11 @@ class DatabaseFunction(object):
         self.engine = preconfigured_engine()
         self.conn = self.engine.connect()
     
+    def __enter__(self):
+        """Wrap the function in a transaction."""
+        self.trans = self.conn.begin()
+        return self
+    
     def __call__(self, *args):
         """Run a function in the database with positional arguments."""
         res = self.conn.execute(
@@ -54,6 +59,13 @@ class DatabaseFunction(object):
             ])
         )
         return res
+    
+    def __exit__(self, type_, value, traceback):
+        """Rollback on error, else commit."""
+        if type_:
+            self.trans.rollback()
+        else:
+            self.trans.commit()
 
  
 def to_csv(res, stream=sys.stdout):
