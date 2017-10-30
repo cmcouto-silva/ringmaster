@@ -1,0 +1,11 @@
+CREATE OR REPLACE FUNCTION public.wipe_tables()
+  RETURNS void AS
+$$
+BEGIN
+
+DROP TABLE IF EXISTS person;
+DROP TABLE IF EXISTS payment;
+
+END
+$$
+LANGUAGE plpgsql VOLATILE;
