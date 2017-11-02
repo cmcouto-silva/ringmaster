@@ -14,7 +14,6 @@ DECS = 'decs/'
 
 class DeclarationSaver(object):
     """Save declarations from a schema in a database."""
-    ### TODO: Factor out explicit SQLAlchemy dependencies ###
     
     def __init__(self, schema):
         self.schema = schema
