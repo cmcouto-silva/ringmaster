@@ -3,3 +3,4 @@ scripts/__pycache__
 .creds
 creds
 tests/test.out
+decs/*

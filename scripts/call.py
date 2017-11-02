@@ -17,11 +17,12 @@ class DatabaseFunctionCall(object):
     
     def __enter__(self):
         """Wrap the database function call in a transaction."""
-        return self.func.__enter__()
+        begin_transaction = self.func.__enter__()
+        return self
     
     def __exit__(self, type_, value, traceback):
         """Rollback on error, else commit."""
-        self.func.__exit__(type_, value, traceback)
+        commit_or_rollback = self.func.__exit__(type_, value, traceback)
     
     def get_arguments(self, kwargs):
         """Get a list of function arguments according to its signature."""
