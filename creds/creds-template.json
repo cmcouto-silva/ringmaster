@@ -1,0 +1,6 @@
+{
+	"user": "mylogin",
+	"dbname": "some-test-database",
+	"host": "localhost",
+	"port": 5432
+}
