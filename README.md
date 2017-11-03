@@ -12,6 +12,7 @@ test errors or failed tests, prompting the user to cease or continue execution.
 Tests are run after each call to a build function.
 
 Some benefits of this process:
+
 * A build shell script fully specifies the build process for a specific build. Anyone who is code literate can do a complete trace of the build after it is run.
 * Injecting tests into the build process documents function-level expected behavior.
 * Injecting tests into the build process catches errors closer to their source, preventing them from propagating.
