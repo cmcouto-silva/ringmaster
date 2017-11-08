@@ -5,6 +5,12 @@ Prompt for continued execution of a program.
 
 import sys
 
+try:
+    from builtins import input
+except ImportError:
+    if sys.version_info[0] < 3:
+        input = raw_input
+
 
 def ask_to_continue():
     """Ask the user if they'd like to continue execution."""

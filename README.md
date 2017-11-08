@@ -114,7 +114,13 @@ $ python
 
 ## Dependencies
 
-* Python 3.6
+For test injection (i.e. running `builds/example_build.sh`):
+
+* Python 2.7 or 3.6 (tested on 2.7.13, 2.7.14, 3.6.3)
+
+For everything else:
+
+* Python 3.6 (tested on 3.6.3)
 * [psycopg2](http://initd.org/psycopg/docs/) (Python database adapter)
 * [SQLAlchemy](https://www.sqlalchemy.org/) (SQL automation library)
 

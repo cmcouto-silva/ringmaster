@@ -22,7 +22,8 @@ def has_error(line):
 
 def test(line):
     """Returns test and its result if line contains a test, else None."""
-    match = re.search(f'^([^,]*),([{TRUE}{FALSE}])$', line)
+    test_expr = '^([^,]*),([{TRUE}{FALSE}])$'.format(TRUE=TRUE, FALSE=FALSE)
+    match = re.search(test_expr, line)
     if match:
         test, res = match.group(1), match.group(2)
         return test, res
@@ -77,21 +78,22 @@ class TestAccountant(object):
         out = self.streams['out']
         
         # General tallies
-        status = f'{self.ntests} tests run, {self.nerrors} errors, {self.nfailed} tests failed'
-        out.write(f'{status}\n\n')
+        stats = [getattr(self, st) for st in ['ntests', 'nerrors', 'nfailed']]
+        status = '%s tests run, %s errors, %s tests failed' % tuple(stats)
+        out.write('%s\n\n' % status)
         
         # Lines on which an error was detected
         if self.nerrors > 0:
             out.write('Errors:\n')
             for error in self.accounts['errors']:
-                out.write(f'{error}\n')
+                out.write('%s\n' % error)
             out.write('\n')
         
         # Names of failed tests
         if self.nfailed > 0:
             out.write('Failed tests:\n')
             for failed_test in self.accounts['failed']:
-                out.write(f'{failed_test}\n')
+                out.write('%s\n' % failed_test)
             out.write('\n')
 
 
