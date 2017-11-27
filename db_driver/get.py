@@ -12,6 +12,10 @@ def get(filename, arg):
         return json.load(file_in)[arg]
 
 
-if __name__ == '__main__':
+def console_script():
     script, filename, arg = sys.argv
     sys.stdout.write(get(filename, arg))
+
+
+if __name__ == '__main__':
+    console_script()

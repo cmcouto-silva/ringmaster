@@ -7,7 +7,7 @@ import re
 import subprocess
 import sys
 
-from pause import ask_to_continue
+from dbdriver.pause import ask_to_continue
 
 
 TRUE = 't'
@@ -116,7 +116,10 @@ def main(dirty=False, strict=False, quiet=False):
         sys.exit(ask_to_continue())
 
 
-if __name__ == '__main__':
+def console_script():
     flags = {flag: True for flag in sys.argv[1:]}
     main(**flags)
 
+
+if __name__ == '__main__':
+    console_script()

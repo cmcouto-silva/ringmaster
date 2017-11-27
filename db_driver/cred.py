@@ -1,0 +1,23 @@
+#!/usr/bin/env python
+"""
+Get a piece of credentials configuration info.
+"""
+
+import sys
+
+from dbdriver.get import get
+
+CREDENTIALS = '.creds'
+
+
+def main(arg):
+    """Get a piece of credentials configuration info."""
+    return get(CREDENTIALS, arg)
+
+
+def as_script():
+    sys.stdout.write(main(sys.argv[1]))
+
+
+if __name__ == '__main__':
+    main(sys.argv[1])

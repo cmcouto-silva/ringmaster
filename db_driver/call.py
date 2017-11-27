@@ -4,8 +4,8 @@ Call a database function, send its output to standard out as a CSV.
 
 import sys
 
-from config import from_config
-import sql
+from dbdriver.config import from_config
+from dbdriver import sql
 
 
 class DatabaseFunctionCall(object):
@@ -47,5 +47,10 @@ def main(dec_file, call_file):
         sql.to_csv(rows, stream=sys.stdout)
 
 
-if __name__ == '__main__':
+def console_script():
     main(*sys.argv[1:])
+
+
+if __name__ == '__main__':
+    console_script()
+

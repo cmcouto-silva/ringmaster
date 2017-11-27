@@ -24,5 +24,13 @@ def ask_to_continue():
     return {'y': 0, 'n': 1}[answer]
 
 
-if __name__ == '__main__':
+def main():
     sys.exit(ask_to_continue())
+
+
+def console_script():
+    main()
+
+
+if __name__ == '__main__':
+    console_script()

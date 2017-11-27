@@ -4,7 +4,7 @@ Call a database function from the command line.
 
 import sys
 
-import sql
+from dbdriver import sql
 
 
 def main(function_name, args):
@@ -14,6 +14,10 @@ def main(function_name, args):
         sql.to_csv(rows, stream=sys.stdout)
 
 
-if __name__ == '__main__':
+def console_script():
     function_name, args = sys.argv[1], sys.argv[2:]
     main(function_name, args)
+
+
+if __name__ == '__main__':
+    console_script()

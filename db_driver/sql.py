@@ -10,7 +10,7 @@ from sqlalchemy import create_engine, MetaData, Table
 from sqlalchemy.sql import select, func
 
 
-from config import from_config
+from dbdriver.config import from_config
 
 
 CREDENTIALS = '.creds'

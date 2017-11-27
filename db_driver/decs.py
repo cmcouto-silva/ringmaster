@@ -6,7 +6,7 @@ import json
 import os
 import sys
 
-import sql
+from dbdriver import sql
 
 
 DECS = 'decs/'
@@ -46,6 +46,9 @@ def main(schema):
     declarations.save()
 
 
-if __name__ == '__main__':
+def console_script():
     main(sys.argv[1])
 
+
+if __name__ == '__main__':
+    console_script()
