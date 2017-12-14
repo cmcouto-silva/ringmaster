@@ -65,16 +65,16 @@ $ for sql in `ls sql/*_info.sql`; do
 
 ### Peripheral usage and contents
 
-Call a function from the command line (injection prevented by SQLAlchemy):
+Run a function from the command line (injection prevented by SQLAlchemy):
 
 ```
 $ # Pointed at local example database
-$ ./scripts/cmd.py hello_world
-$ ./scripts/cmd.py add 1 2
+$ ./scripts/run.py hello_world
+$ ./scripts/run.py add 1 2
 
 $ # Pointed at gibbs-test
-$ ./scripts/cmd.py uuid_generate_v4
-$ ./scripts/cmd.py create_property_key "FAZ BOA VISTA II"
+$ ./scripts/run.py uuid_generate_v4
+$ ./scripts/run.py create_property_key "FAZ BOA VISTA II"
 ```
 
 Call a function from a saved set of arguments:

@@ -30,7 +30,7 @@ def main():
 		    'console_scripts': [
 		        'call=db_driver.call:console_script',
 		        'checkpoint=db_driver.checkpoint:console_script',
-		        'run=db_driver.cmd:console_script',
+		        'run=db_driver.run:console_script',
 		        'cred=db_driver.cred:console_script',
 		        'decs=db_driver.decs:console_script',
 		        'get=db_driver.get:console_script',

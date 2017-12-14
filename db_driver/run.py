@@ -1,5 +1,5 @@
 """
-Call a database function from the command line.
+Run a database function from the command line.
 """
 
 import sys
