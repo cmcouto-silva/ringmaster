@@ -6,14 +6,14 @@ import json
 import os
 import sys
 
-from dbdriver import sql
+from db_driver import sql
 
 
 DECS = 'decs/'
 
 
 class DeclarationSaver(object):
-    """Save declarations from a schema in a database."""
+    """Save function declarations from a schema in a database."""
     
     def __init__(self, schema):
         self.schema = schema
@@ -36,7 +36,7 @@ class DeclarationSaver(object):
         for name, signature in self.fetch():
             if signature is None:
                 signature = []
-            with open(os.path.join(DECS, f'{name}.json'), 'w') as file_out:
+            with open(os.path.join(DECS, '{name}.json'.format(name=name)), 'w') as file_out:
                 json.dump({'name': name, 'signature': signature}, file_out, indent=4)
     
 

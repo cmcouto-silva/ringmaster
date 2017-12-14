@@ -9,8 +9,7 @@ import psycopg2
 from sqlalchemy import create_engine, MetaData, Table
 from sqlalchemy.sql import select, func
 
-
-from dbdriver.config import from_config
+from db_driver.config import from_config
 
 
 CREDENTIALS = '.creds'
@@ -18,13 +17,17 @@ CREDENTIALS = '.creds'
 
 def postgres_engine(user, dbname, host, port, echo=False):
     """Make a PostgreSQL database engine."""
-    url = f'postgresql+psycopg2://{user}@{host}:{port}/{dbname}'
+    url = 'postgresql+psycopg2://{user}@{host}:{port}/{dbname}'.format(
+        user=user, host=host, port=port, dbname=dbname
+    )
     return create_engine(url, echo=echo)
 
 
 def postgres_connection(user, dbname, host, port, echo=False):
     """Make a PostgreSQL database connection."""
-    dsn = f'dbname={dbname} user={user} host={host} port={port}'
+    dsn = 'dbname={dbname} user={user} host={host} port={port}'.format(
+        dbname=dbname, user=user, host=host, port=port
+    )
     return psycopg2.connect(dsn)
 
 

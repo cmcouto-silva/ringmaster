@@ -4,10 +4,9 @@ Inject a testing checkpoint into the build process.
 """
 
 import re
-import subprocess
 import sys
 
-from dbdriver.pause import ask_to_continue
+from db_driver.pause import ask_to_continue
 
 
 TRUE = 't'

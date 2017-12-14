@@ -4,7 +4,7 @@ Call a database function from the command line.
 
 import sys
 
-from dbdriver import sql
+from db_driver import sql
 
 
 def main(function_name, args):

@@ -4,8 +4,8 @@ Call a database function, send its output to standard out as a CSV.
 
 import sys
 
-from dbdriver.config import from_config
-from dbdriver import sql
+from db_driver.config import from_config
+from db_driver import sql
 
 
 class DatabaseFunctionCall(object):
