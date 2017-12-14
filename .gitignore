@@ -5,3 +5,4 @@ scripts/*.pyc
 creds
 tests/test.out
 decs/*
+*.egg-info
