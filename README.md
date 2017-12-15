@@ -24,7 +24,7 @@ more rigorously.
 
 As an aside, some other functionality for documenting and inspecting database function calls
 is also included. While not used in the formal build process, these tools highlight some
-of the ways that Python can be used to interact with the database.
+of the ways that Python can be used to interact with a database.
 
 ### Core usage and contents
 
@@ -99,26 +99,37 @@ $ python
 >>> print(result)  # Result is a tuple; res[0] is the string
 ```
 
-## Directories
+## Using `db-driver` to manage a project
 
-* `db_driver` Workhorse code that analyzes test output, plus some other goodies.
-* `creds` Suggested place to store database credentials.
-* `sql` Views that identify the indices and constraints in the database.
-* `functions` Example functions to be loaded into an example database.
-* `tests` Tests written against various stages of the build process.
-* `builds` Shell scripts that encapsulate an entire build.
-* `calls` Files that hold arguments for database function calls. Orthogonal to the testing process.
-* `decs` Files that hold function declarations. Orthogonal to the testing process.
+`db-driver` includes the script `db-driver-init` that sets up a project root directory,
+creating well-known locations for project elements like configuration, metadata, and tests:
+
+```
+$ mkdir -p project_root
+$ cd project_root
+$ db-driver-init
+...
+$ ls -aR
+```
+
+Directories that `db-driver-init` creates for project use:
+
+* `builds` Shell scripts that encapsulate an entire build, carrying the database from one state to the next.
+* `calls` JSON files specifying a call to a database function. Used to document a function call.
+* `config` JSON files specifying arguments to any user-defined client-side scripts (cf. scripts directory).
+* `creds` JSON files holding database credentials used to connect to a database.
+* `decs` JSON files holding database function declarations that are fetched with the `decs` script. Input for the `call` script.
+* `docs` Written material or other resources that document a project.
+* `functions` Definitions of database functions, (i.e. CREATE OR REPLACE FUNCTION ...), especially build functions.
+* `input` Input files to populate a database with. Symlinks to files elsewhere are encouraged but not required.
+* `output` Output files generated while working on a project. Can be results, intermediate results, temporary debugging output, etc.
+* `scripts` Any user-defined client-side scripts.
+* `sql` Non-function SQL, like DDL, helper views, or other SQL relevant to a project.
+* `tests` Boolean-valued tests written in SQL that can be injected into a database's build process.
 
 ## Dependencies
 
-For test injection (i.e. running `builds/example_build.sh`):
-
 * Python 2.7 or 3.6 (tested on 2.7.13, 2.7.14, 3.6.3)
-
-For everything else:
-
-* Python 3.6 (tested on 3.6.3)
 * [psycopg2](http://initd.org/psycopg/docs/) (Python database adapter)
 * [SQLAlchemy](https://www.sqlalchemy.org/) (SQL automation library)
 

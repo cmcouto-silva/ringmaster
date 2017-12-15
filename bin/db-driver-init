@@ -9,7 +9,7 @@ set -e
 echo
 
 echo "Creating directories; assuming current directory is project root"
-skeleton="builds calls config creds decs docs functions input output sql tests"
+skeleton="builds calls config creds decs docs functions input output scripts sql tests"
 echo "Directories: $skeleton"
 
 for dir in $skeleton; do
@@ -46,47 +46,12 @@ ln -sf creds/template.json .creds
 echo
 
 echo "Appending to .gitignore"
-ignore="calls config creds decs input output tests/test.out *.desc"
+ignore="creds decs input output tests/test.out *.desc"
 echo "Ignoring: $ignore"
 
 for ig in $ignore; do
     echo $ig >> .gitignore
 done
-
-### Add descriptions to each directory ###
-
-echo
-
-desc="docs/DIRECTORIES.txt"
-echo "Adding directory descriptions to $desc"
-
-echo "builds: Shell scripts that carry a database \
-from one state to the next." >> $desc
-
-echo "calls: JSON files specifying a call to a database function." >> $desc
-
-echo "creds: JSON files holding database credentials used \
-to connect to a database." >> $desc
-
-echo "decs: Database function declarations that are fetched \
-from a database with the decs script." >> $desc
-
-echo "docs: Files that document this project." >> $desc
-
-echo "functions: Definitions of database functions, (i.e. CREATE OR REPLACE FUNCTION ...), \
-especially build functions." >> $desc
-
-echo "input: Input files to populate a database with. \
-Symlinks to files elsewhere are encouraged but not required." >> $desc
-
-echo "output: Output files generated while working on this project. \
-Can be results, intermediate results, temporary test output, etc." >> $desc
-
-echo "sql: Non-function SQL, like DDL, helper views, \
-or other SQL relevant to this project." >> $desc
-
-echo "tests: Boolean-valued tests written in SQL that can be injected \
-into a database's build process." >> $desc
 
 ###
 
