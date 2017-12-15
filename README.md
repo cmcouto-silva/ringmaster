@@ -31,7 +31,7 @@ of the ways that Python can be used to interact with the database.
 Test the build process control flow:
 
 ```
-$ ./scripts/test_checkpoint.sh
+$ test-checkpoint
 ```
 
 Create an example database, load functions into it:
@@ -69,33 +69,31 @@ Run a function from the command line (injection prevented by SQLAlchemy):
 
 ```
 $ # Pointed at local example database
-$ ./scripts/run.py hello_world
-$ ./scripts/run.py add 1 2
+$ run hello_world
+$ run add 1 2
 
 $ # Pointed at gibbs-test
-$ ./scripts/run.py uuid_generate_v4
-$ ./scripts/run.py create_property_key "FAZ BOA VISTA II"
+$ run uuid_generate_v4
+$ run create_property_key "FAZ BOA VISTA II"
 ```
 
 Call a function from a saved set of arguments:
 
 ```
 $ # Pointed at gibbs-test
-$ # Grab function declarations (needed for call.py)
-$ ./scripts/decs.py public
+$ # Grab function declarations (needed for call script)
+$ decs public
 $ # Call a function using declaration and argument files
-$ ./scripts/call.py decs/create_property_key.json calls/faz_boa_vista_ii.json
+$ call decs/create_property_key.json calls/faz_boa_vista_ii.json
 ```
 
 Call a function from an interactive Python shell:
 
 ```
 $ # Pointed at gibbs-test
-$ cd scripts
 $ python
 ...
->>> import sql
->>> sql.CREDENTIALS = '../.creds'
+>>> from db_driver import sql
 >>> create_property_key = sql.DatabaseFunction('create_property_key')
 >>> result, = create_property_key('FAZ BOA VISTA II')
 >>> print(result)  # Result is a tuple; res[0] is the string
@@ -103,7 +101,7 @@ $ python
 
 ## Directories
 
-* `scripts` Workhorse code that analyzes test output, plus some other goodies.
+* `db_driver` Workhorse code that analyzes test output, plus some other goodies.
 * `creds` Suggested place to store database credentials.
 * `sql` Views that identify the indices and constraints in the database.
 * `functions` Example functions to be loaded into an example database.
@@ -128,9 +126,9 @@ For everything else:
 
 ### Installing dependencies
 
-On Mac OS X, Homebrew is recommended for installing and upgrading Python 3. On Linux,
+On Mac OS X, Homebrew is recommended for installing and upgrading Python. On Linux,
 distro package managers (apt-get for Ubuntu, yum for Fedora, ...) should work, but
-versions of Python 3 may be old. Other versions of Python 3 are likely to work, but
+versions of Python may be old. Other versions of Python are likely to work, but
 have not been tested.
 
 The Python package manager [pip](https://pip.pypa.io/en/stable/) is the recommended
@@ -138,7 +136,9 @@ way for installing psycopg2 and SQLAlchemy. On Mac OS X, Homebrew ships pip with
 versions of Python. To check if pip is installed on your computer:
 
 ```
-$ which pip3
+$ which pip  # System pip
+$ which pip2  # Homebrew pip for Python 2
+$ which pip3  # Homebrew pip for Python 3
 ```
 
 The recommended way to install Python packages is underneath the user's home directory
@@ -148,8 +148,8 @@ in a virtual environment using [virtualenv](https://virtualenv.pypa.io/en/stable
 If foregoing virtual environments, install psycopg2 and SQLAlchemy globally using pip:
 
 ```
-$ sudo -H pip3 install psycopg2
-$ sudo -H pip3 install sqlalchemy
+$ sudo -H pip install psycopg2
+$ sudo -H pip install sqlalchemy
 ```
 
 ### Configuring database credentials

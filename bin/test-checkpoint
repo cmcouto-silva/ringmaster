@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Toy example to test the control flow of the test process.
+
+# Exit on nonzero error code
+set -e
+
+# Trigger response to an error
+error > tests/test.out 2>&1
+checkpoint
+
+# Pass through a passed test
+passed > tests/test.out 2>&1
+checkpoint
+
+# Trigger response to a failed test
+failed > tests/test.out 2>&1
+checkpoint
+
+# Pass through another passed test
+passed > tests/test.out 2>&1
+checkpoint
