@@ -46,7 +46,7 @@ ln -sf creds/template.json .creds
 echo
 
 echo "Appending to .gitignore"
-ignore="creds decs input output tests/test.out *.desc"
+ignore=".creds creds decs input output tests/test.out"
 echo "Ignoring: $ignore"
 
 for ig in $ignore; do
