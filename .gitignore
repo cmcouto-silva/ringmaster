@@ -1,6 +1,6 @@
 *~
-scripts/__pycache__
-scripts/*.pyc
+db_driver/__pycache__
+db_driver/*.pyc
 .creds
 creds
 tests/test.out
