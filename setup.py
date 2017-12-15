@@ -25,6 +25,7 @@ def main():
 		    'bin/passed',
 		    'bin/failed',
 		    'bin/test-checkpoint',
+		    'bin/refresh-funcs'
 		],
 		'entry_points': {
 		    'console_scripts': [

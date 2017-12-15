@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Refresh function definitions in a database.
+
+for f in `ls functions`; do
+    psql -U $(cred user) -d $(cred dbname) -h $(cred host) -f "functions/$f"
+done
