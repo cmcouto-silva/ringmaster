@@ -1,0 +1,63 @@
+#!/bin/bash
+
+# Initialize a project using db-driver.
+
+set -e
+
+### Initialize files and directories ###
+
+# Initialize directories. Assumes current directory is project root.
+skeleton="builds calls config creds decs docs functions input output sql tests"
+
+for dir in $skeleton; do
+    mkdir -p "$dir"
+done
+
+# Initialize files. Touching all of them for documentation purposes.
+files="creds/template.json .gitignore README.md"
+
+for f in $files; do
+    touch "$f"
+done
+
+# Initialize credentials template.
+echo $'{\n\t"user": "",\n\t"dbname": "",\n\t"host": "",\n\t"port": ""\n}\n' > creds/template.json
+
+# Initialize .creds symlink to point to credentials template.
+ln -sf creds/template.json .creds
+
+# Initialize .gitignore.
+ignore="config creds input output tests/test.out *.desc"
+for ig in $ignore; do
+    echo $ig >> .gitignore
+done
+
+### Add descriptions to each directory ###
+
+echo "Shell scripts that carry a database \
+from one state to the next." > builds/BUILDS.desc
+
+echo "Database function declarations that are fetched \
+from a database with the decs script." > decs/DECS.desc
+
+echo "JSON files holding database credentials used \
+to connect to a database." > creds/CREDS.desc
+
+echo "Definitions of database functions, (i.e. CREATE OR REPLACE FUNCTION ...), \
+especially build functions." > functions/FUNCTIONS.desc
+
+echo "Input files to populate a database with. \
+Symlinks to files elsewhere are encouraged but not required." > input/INPUT.desc
+
+echo "Output files generated while working on this project. \
+Can be results, intermediate results, temporary test output, etc." > output/OUTPUT.desc
+
+echo "JSON files specifying a call to a database function." > calls/CALLS.desc
+
+echo "Non-function SQL, like DDL, helper views, \
+or other SQL relevant to this project." > sql/SQL.desc
+
+echo "Boolean-valued tests written in SQL that can be injected \
+into a database's build process." > tests/TESTS.desc
+
+
