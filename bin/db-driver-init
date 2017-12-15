@@ -1,38 +1,63 @@
 #!/bin/bash
 
-# Initialize a project using db-driver.
+# Initialize a project that uses db-driver.
 
 set -e
 
 ### Initialize files and directories ###
 
-# Initialize directories. Assumes current directory is project root.
+echo
+
+echo "Creating directories; assuming current directory is project root"
 skeleton="builds calls config creds decs docs functions input output sql tests"
+echo "Directories: $skeleton"
 
 for dir in $skeleton; do
     mkdir -p "$dir"
 done
 
-# Initialize files. Touching all of them for documentation purposes.
+###
+
+echo
+
+echo "Touching files"
 files="creds/template.json .gitignore README.md"
+echo "Files: $files"
 
 for f in $files; do
     touch "$f"
 done
 
-# Initialize credentials template.
-echo $'{\n\t"user": "",\n\t"dbname": "",\n\t"host": "",\n\t"port": ""\n}\n' > creds/template.json
+###
 
-# Initialize .creds symlink to point to credentials template.
+echo
+
+echo "Creating credentials template"
+template="creds/template.json"
+echo "Template: $template"
+
+echo $'{\n\t"user": "",\n\t"dbname": "",\n\t"host": "",\n\t"port": ""\n}\n' > $template
+
+echo "Make .creds symlink to point to credentials template initially"
 ln -sf creds/template.json .creds
 
-# Initialize .gitignore.
-ignore="config creds input output tests/test.out *.desc"
+###
+
+echo
+
+echo "Appending to .gitignore"
+ignore="calls config creds decs input output tests/test.out *.desc"
+echo "Ignoring: $ignore"
+
 for ig in $ignore; do
     echo $ig >> .gitignore
 done
 
 ### Add descriptions to each directory ###
+
+echo
+
+echo "Adding descriptions to project directories"
 
 echo "Shell scripts that carry a database \
 from one state to the next." > builds/BUILDS.desc
@@ -60,4 +85,7 @@ or other SQL relevant to this project." > sql/SQL.desc
 echo "Boolean-valued tests written in SQL that can be injected \
 into a database's build process." > tests/TESTS.desc
 
+###
+
+echo
 

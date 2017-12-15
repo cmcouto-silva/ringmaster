@@ -25,7 +25,8 @@ def main():
 		    'bin/passed',
 		    'bin/failed',
 		    'bin/test-checkpoint',
-		    'bin/refresh-funcs'
+		    'bin/refresh-funcs',
+		    'bin/db-driver-init'
 		],
 		'entry_points': {
 		    'console_scripts': [
