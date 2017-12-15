@@ -29,7 +29,7 @@ class DeclarationSaver(object):
           AND pg_namespace.nspname = %s
         ORDER BY pg_proc.proname;
         """, (self.schema,))
-        yield from cur
+        return cur
     
     def save(self):
         """Save the function declarations in a preconfigured directory."""

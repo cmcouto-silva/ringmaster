@@ -38,8 +38,8 @@ Create an example database, load functions into it:
 
 ```
 $ createdb -U <user> -h localhost <dbname>
-$ for sql in `ls functions/*.sql`; do
->     psql -U <user> -d <dbname> -h localhost -f "$sql"
+$ for f in `ls functions`; do
+>     psql -U <user> -d <dbname> -h localhost -f "functions/$f"
 > done
 ```
 
@@ -83,8 +83,8 @@ Call a function from a saved set of arguments:
 $ # Pointed at gibbs-test
 $ # Grab function declarations (needed for call script)
 $ decs public
-$ # Call a function using declaration and argument files
-$ call decs/create_property_key.json calls/faz_boa_vista_ii.json
+$ # Call a function using an argument file
+$ call create_property_key calls/faz_boa_vista_ii.json
 ```
 
 Call a function from an interactive Python shell:

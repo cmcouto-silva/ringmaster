@@ -2,10 +2,11 @@
 Call a database function, send its output to standard out as a CSV.
 """
 
+import os
 import sys
 
 from db_driver.config import from_config
-from db_driver import sql
+from db_driver import sql, decs
 
 
 class DatabaseFunctionCall(object):
@@ -48,7 +49,10 @@ def main(dec_file, call_file):
 
 
 def console_script():
-    main(*sys.argv[1:])
+    # Specify function name instead of declaration file
+    script, func_name, call_file = sys.argv
+    dec_file = os.path.join(decs.DECS, '{func}.json'.format(func=func_name))
+    main(dec_file, call_file)
 
 
 if __name__ == '__main__':
