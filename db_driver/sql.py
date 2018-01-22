@@ -41,6 +41,25 @@ def preconfigured_connection():
     return from_config(postgres_connection)(CREDENTIALS)
 
 
+class DatabaseEnvironment(object):
+    """Database setup and teardown."""
+    
+    def __init__(self):
+        self.engine = preconfigured_engine()
+        self.meta = MetaData()
+        self.conn = self.engine.connect()
+    
+    def __enter__(self):
+        self.trans = self.conn.begin()
+        return self
+    
+    def __exit__(self, type_, value, traceback):
+        if type_:
+            self.trans.rollback()
+        else:
+            self.trans.commit()
+
+
 class DatabaseFunction(object):
     """A wrapper around a function in the database."""
     
