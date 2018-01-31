@@ -59,6 +59,9 @@ class DatabaseEnvironment(object):
         else:
             self.trans.commit()
 
+    def Table(self, table, **kwargs):
+        return Table(table, self.meta, autoload=True, autoload_with=self.engine, **kwargs)
+
 
 class DatabaseFunction(object):
     """A wrapper around a function in the database."""
