@@ -18,7 +18,7 @@ def main():
 		'download_url': 'https://mj-christie@bitbucket.org/mj-christie/db-driver.git',
 		'author_email': 'christiemj09@gmail.com',
 		'version': '0.1',
-		'install_requires': ['psycopg2', 'sqlalchemy'],
+		'install_requires': ['psycopg2-binary', 'sqlalchemy'],
 		'packages': ['db_driver'],
 		'scripts': [
 		    'bin/error',
