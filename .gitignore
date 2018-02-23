@@ -1,6 +1,6 @@
 *~
-db_driver/__pycache__
-db_driver/*.pyc
+ringmaster/__pycache__
+ringmaster/*.pyc
 .creds
 creds
 tests/test.out

@@ -6,7 +6,7 @@ import json
 import os
 import sys
 
-from db_driver import sql
+from ringmaster import sql
 
 
 DECS = 'decs/'

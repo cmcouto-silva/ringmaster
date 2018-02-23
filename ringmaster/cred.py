@@ -5,7 +5,7 @@ Get a piece of credentials configuration info.
 
 import sys
 
-from db_driver.get import get
+from ringmaster.get import get
 
 CREDENTIALS = '.creds'
 

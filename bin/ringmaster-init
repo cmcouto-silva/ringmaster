@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Initialize a project that uses db-driver.
+# Initialize a project that uses ringmaster.
 
 set -e
 

@@ -5,8 +5,8 @@ Call a database function, send its output to standard out as a CSV.
 import os
 import sys
 
-from db_driver.config import from_config
-from db_driver import sql, decs
+from ringmaster.config import from_config
+from ringmaster import sql, decs
 
 
 class DatabaseFunctionCall(object):

@@ -93,26 +93,26 @@ Call a function from an interactive Python shell:
 $ # Pointed at gibbs-test
 $ python
 ...
->>> from db_driver import sql
+>>> from ringmaster import sql
 >>> create_property_key = sql.DatabaseFunction('create_property_key')
 >>> result, = create_property_key('FAZ BOA VISTA II')
 >>> print(result)  # Result is a tuple; res[0] is the string
 ```
 
-## Using `db-driver` to manage a project
+## Using `ringmaster` to manage a project
 
-`db-driver` includes the script `db-driver-init` that sets up a project root directory,
+`ringmaster` includes the script `ringmaster-init` that sets up a project root directory,
 creating well-known locations for project elements like configuration, metadata, and tests:
 
 ```
 $ mkdir -p project_root
 $ cd project_root
-$ db-driver-init
+$ ringmaster-init
 ...
 $ ls -aR
 ```
 
-Directories that `db-driver-init` creates for project use:
+Directories that `ringmaster-init` creates for project use:
 
 * `builds` Shell scripts that encapsulate an entire build, carrying the database from one state to the next.
 * `calls` JSON files specifying a call to a database function. Used to document a function call.
@@ -183,7 +183,7 @@ Use a symlink to point at the currently desired database credentials.
 The symlink is expected to be named `.creds` in the project root:
 
 ```
-$ cd path/to/db-driver
+$ cd path/to/ringmaster
 $ ln -sf path/to/example_creds.json .creds
 ```
 

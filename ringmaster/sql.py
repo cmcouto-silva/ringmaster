@@ -9,7 +9,7 @@ import psycopg2
 from sqlalchemy import create_engine, MetaData, Table
 from sqlalchemy.sql import select, func
 
-from db_driver.config import from_config
+from ringmaster.config import from_config
 
 
 CREDENTIALS = '.creds'

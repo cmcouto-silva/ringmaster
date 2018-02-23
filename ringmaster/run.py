@@ -4,7 +4,7 @@ Run a database function from the command line.
 
 import sys
 
-from db_driver import sql
+from ringmaster import sql
 
 
 def main(function_name, args):
