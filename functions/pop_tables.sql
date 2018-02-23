@@ -4,18 +4,18 @@ $$
 BEGIN
 
 INSERT INTO person(name) VALUES
-    ('Matt Christie'),
-    ('Jake Munger'),
-    ('Lisa Rausch'),
-    ('Dan Fischer'),
-    ('Bert Lyons');
+    ('Paul McCartney'),
+    ('John Lennon'),
+    ('George Harrison'),
+    ('Ringo Starr'),
+    ('Brian Epstein');
 
 INSERT INTO payment("from", "to", "amt") VALUES
-    ('Matt Christie', 'Jake Munger', 2.50),
-    ('Jake Munger', 'Bert Lyons', 1.75),
-    ('Lisa Rausch', 'Bert Lyons', 2.25),
-    ('Bert Lyons', 'Dan Fischer', 2.00),
-    ('Dan Fischer', 'Jake Munger', 2.25);
+    ('Paul McCartney', 'John Lennon', 2.50),
+    ('John Lennon', 'Ringo Starr', 1.75),
+    ('George Harrison', 'Ringo Starr', 2.25),
+    ('Ringo Starr', 'Brian Epstein', 2.00),
+    ('Brian Epstein', 'John Lennon', 2.25);
 
 END
 $$

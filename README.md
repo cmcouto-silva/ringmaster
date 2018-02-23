@@ -1,4 +1,4 @@
-# Inject tests into the database build process.
+# Inject tests into the build process of a PostgreSQL database.
 
 Author: Matt Christie (christiemj09@gmail.com)
 
@@ -65,38 +65,34 @@ $ for sql in `ls sql/*_info.sql`; do
 
 ### Peripheral usage and contents
 
-Run a function from the command line (injection prevented by SQLAlchemy):
+Run a function from the command line:
 
 ```
 $ # Pointed at local example database
 $ run hello_world
 $ run add 1 2
-
-$ # Pointed at gibbs-test
-$ run uuid_generate_v4
-$ run create_property_key "FAZ BOA VISTA II"
 ```
 
 Call a function from a saved set of arguments:
 
 ```
-$ # Pointed at gibbs-test
+$ # Pointed at example database
 $ # Grab function declarations (needed for call script)
 $ decs public
 $ # Call a function using an argument file
-$ call create_property_key calls/faz_boa_vista_ii.json
+$ call add calls/add_1_2.json
 ```
 
 Call a function from an interactive Python shell:
 
 ```
-$ # Pointed at gibbs-test
+$ # Pointed at example
 $ python
 ...
 >>> from ringmaster import sql
->>> create_property_key = sql.DatabaseFunction('create_property_key')
->>> result, = create_property_key('FAZ BOA VISTA II')
->>> print(result)  # Result is a tuple; res[0] is the string
+>>> add = sql.DatabaseFunction('add')
+>>> result, = add(1, 2)
+>>> print(result)  # Result is a tuple
 ```
 
 ## Using `ringmaster` to manage a project
@@ -121,7 +117,7 @@ Directories that `ringmaster-init` creates for project use:
 * `decs` JSON files holding database function declarations that are fetched with the `decs` script. Input for the `call` script.
 * `docs` Written material or other resources that document a project.
 * `functions` Definitions of database functions, (i.e. CREATE OR REPLACE FUNCTION ...), especially build functions.
-* `input` Input files to populate a database with. Symlinks to files elsewhere are encouraged but not required.
+* `input` Input files or symlinks to input files to populate a database with.
 * `output` Output files generated while working on a project. Can be results, intermediate results, temporary debugging output, etc.
 * `scripts` Any user-defined client-side scripts.
 * `sql` Non-function SQL, like DDL, helper views, or other SQL relevant to a project.
@@ -138,7 +134,7 @@ Directories that `ringmaster-init` creates for project use:
 ### Installing dependencies
 
 On Mac OS X, Homebrew is recommended for installing and upgrading Python. On Linux,
-distro package managers (apt-get for Ubuntu, yum for Fedora, ...) should work, but
+distro package managers (apt-get for Ubuntu, yum for Red Hat, ...) should work, but
 versions of Python may be old. Other versions of Python are likely to work, but
 have not been tested.
 
@@ -153,9 +149,7 @@ $ which pip3  # Homebrew pip for Python 3
 ```
 
 The recommended way to install Python packages is underneath the user's home directory
-in a virtual environment using [virtualenv](https://virtualenv.pypa.io/en/stable/). See
-`PYTHON.md` for resources on how to use virtual environments to manage third-party code.
-
+in a virtual environment using [virtualenv](https://virtualenv.pypa.io/en/stable/).
 If foregoing virtual environments, install psycopg2 and SQLAlchemy globally using pip:
 
 ```
