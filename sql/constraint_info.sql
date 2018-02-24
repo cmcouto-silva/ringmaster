@@ -1,6 +1,6 @@
 -- Get info on the constraints in the database.
 
-CREATE VIEW mattc.constraint_info AS
+CREATE VIEW constraint_info AS
     SELECT pn.nspname AS schema_name,
            pc.relname AS rel_name,
            pco.conname AS constraint_name,

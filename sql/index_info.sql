@@ -1,6 +1,6 @@
 -- Get info on the indexes in the database.
 
-CREATE VIEW mattc.index_info AS
+CREATE VIEW index_info AS
     SELECT pn.nspname AS schema_name,
            pc2.relname AS rel_name,
            pc1.relname AS index_name,
