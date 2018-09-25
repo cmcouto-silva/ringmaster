@@ -15,7 +15,7 @@ from ringmaster.config import from_config
 CREDENTIALS = '.creds'
 
 
-def postgres_engine(user, dbname, host, port, echo=False):
+def postgres_engine(user, dbname, host, port, echo=False, **kwargs):
     """Make a PostgreSQL database engine."""
     url = 'postgresql+psycopg2://{user}@{host}:{port}/{dbname}'.format(
         user=user, host=host, port=port, dbname=dbname
@@ -23,7 +23,7 @@ def postgres_engine(user, dbname, host, port, echo=False):
     return create_engine(url, echo=echo)
 
 
-def postgres_connection(user, dbname, host, port, echo=False):
+def postgres_connection(user, dbname, host, port, echo=False, **kwargs):
     """Make a PostgreSQL database connection."""
     dsn = 'dbname={dbname} user={user} host={host} port={port}'.format(
         dbname=dbname, user=user, host=host, port=port
