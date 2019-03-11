@@ -49,7 +49,7 @@ def main(schema, location=DECS):
 
 
 def console_script():
-    main(sys.argv[1])
+    main(*sys.argv[1:])
 
 
 if __name__ == '__main__':
