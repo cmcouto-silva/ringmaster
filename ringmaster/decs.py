@@ -9,7 +9,7 @@ import sys
 from ringmaster import sql
 
 
-DECS = 'decs/'
+DECS = '.decs/'
 
 
 class DeclarationSaver(object):
