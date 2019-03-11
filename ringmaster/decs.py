@@ -44,7 +44,7 @@ class DeclarationSaver(object):
 
 def main(schema, location=DECS):
     """Save the function declarations from a schema in a preconfigured directory."""
-    declarations = DeclarationSaver(schema, location=DECS)
+    declarations = DeclarationSaver(schema, location=location)
     declarations.save()
 
 
