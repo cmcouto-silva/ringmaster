@@ -15,8 +15,9 @@ DECS = 'decs/'
 class DeclarationSaver(object):
     """Save function declarations from a schema in a database."""
     
-    def __init__(self, schema):
+    def __init__(self, schema, location=DECS):
         self.schema = schema
+        self.location = location
         self.conn = sql.preconfigured_connection()
     
     def fetch(self):
@@ -36,13 +37,14 @@ class DeclarationSaver(object):
         for name, signature in self.fetch():
             if signature is None:
                 signature = []
-            with open(os.path.join(DECS, '{name}.json'.format(name=name)), 'w') as file_out:
+            filename = os.path.join(self.location, '{name}.json'.format(name=name))
+            with open(filename, 'w') as file_out:
                 json.dump({'name': name, 'signature': signature}, file_out, indent=4)
     
 
-def main(schema):
+def main(schema, location=DECS):
     """Save the function declarations from a schema in a preconfigured directory."""
-    declarations = DeclarationSaver(schema)
+    declarations = DeclarationSaver(schema, location=DECS)
     declarations.save()
 
 
