@@ -9,21 +9,21 @@ import psycopg2
 from sqlalchemy import create_engine, MetaData, Table
 from sqlalchemy.sql import select, func
 
-from ringmaster.config import from_config
+from ringmaster.config import from_json, from_env
 
 
 CREDENTIALS = '.creds'
 
 
-def postgres_engine(user, dbname, host, port, echo=False, **kwargs):
+def postgres_engine(user, dbname, host, port, **kwargs):
     """Make a PostgreSQL database engine."""
     url = 'postgresql+psycopg2://{user}@{host}:{port}/{dbname}'.format(
         user=user, host=host, port=port, dbname=dbname
     )
-    return create_engine(url, echo=echo)
+    return create_engine(url, echo=False)
 
 
-def postgres_connection(user, dbname, host, port, echo=False, **kwargs):
+def postgres_connection(user, dbname, host, port, **kwargs):
     """Make a PostgreSQL database connection."""
     dsn = 'dbname={dbname} user={user} host={host} port={port}'.format(
         dbname=dbname, user=user, host=host, port=port
@@ -31,21 +31,27 @@ def postgres_connection(user, dbname, host, port, echo=False, **kwargs):
     return psycopg2.connect(dsn)
 
 
-def preconfigured_engine():
+def preconfigured_engine(load_method='from_json'):
     """Get a preconfigured PostgreSQL database engine."""
-    return from_config(postgres_engine)(CREDENTIALS)
+    return {
+        'from_json': (lambda: from_json(postgres_engine)(CREDENTIALS)),
+        'from_env': (lambda: from_env(postgres_engine)())
+    }[load_method]()
 
 
-def preconfigured_connection():
+def preconfigured_connection(load_method='from_json'):
     """Get a preconfigured PostgreSQL database connection."""
-    return from_config(postgres_connection)(CREDENTIALS)
+    return {
+        'from_json': (lambda: from_json(postgres_connection)(CREDENTIALS)),
+        'from_env': (lambda: from_env(postgres_connection)())
+    }[load_method]()
 
 
 class DatabaseEnvironment(object):
     """Database setup and teardown."""
     
-    def __init__(self):
-        self.engine = preconfigured_engine()
+    def __init__(self, load_method='from_json'):
+        self.engine = preconfigured_engine(load_method=load_method)
         self.meta = MetaData()
         self.conn = self.engine.connect()
     
@@ -66,9 +72,9 @@ class DatabaseEnvironment(object):
 class DatabaseFunction(object):
     """A wrapper around a function in the database."""
     
-    def __init__(self, name):
+    def __init__(self, name, load_method='from_json'):
         self.name = name
-        self.engine = preconfigured_engine()
+        self.engine = preconfigured_engine(load_method=load_method)
         self.conn = self.engine.connect()
     
     def __enter__(self):
