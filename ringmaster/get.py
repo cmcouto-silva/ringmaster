@@ -8,7 +8,7 @@ import sys
 
 
 def get(filename, arg):
-    with open(filename, 'r') as file_in:
+    with open(filename, 'r', encoding='utf8') as file_in:
         return json.load(file_in)[arg]
 
 
