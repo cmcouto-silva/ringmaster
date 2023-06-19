@@ -1,8 +1,20 @@
-*~
-ringmaster/__pycache__
-ringmaster/*.pyc
+# DB interaction
 .creds
 creds
 tests/test.out
 decs/*
+
+# Python
+*.pyc
+__pycache
 *.egg-info
+.ipynb_checkpoints
+
+# macOS
+.DS_Store
+
+# Emacs
+*~
+
+# JetBrains
+.idea
