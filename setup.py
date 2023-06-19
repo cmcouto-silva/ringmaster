@@ -32,7 +32,8 @@ def main():
 		        'cred=ringmaster.cred:console_script',
 		        'decs=ringmaster.decs:console_script',
 		        'get=ringmaster.get:console_script',
-		        'pause=ringmaster.pause:console_script'
+		        'pause=ringmaster.pause:console_script',
+		        'wait_for=ringmaster.wait_for:console_script',
 		    ]
 		},
 		'name': 'ringmaster'
