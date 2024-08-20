@@ -85,9 +85,7 @@ class DatabaseFunction(object):
     def __call__(self, *args):
         """Run a function in the database with positional arguments."""
         res = self.conn.execute(
-            select([
-                getattr(func, self.name)(*args)
-            ])
+            select(getattr(func, self.name)(*args))
         )
         return res
     
